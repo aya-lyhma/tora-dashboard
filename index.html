@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🐯 虎之助 週次チェック</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, sans-serif; background: #0f172a; color: #e2e8f0; padding: 16px; font-size: 15px; }
+  h1 { font-size: 1.2rem; color: #f8fafc; margin-bottom: 4px; }
+  .date { color: #94a3b8; font-size: 0.85rem; margin-bottom: 20px; }
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+  .card { background: #1e293b; border-radius: 12px; padding: 14px; }
+  .card-label { font-size: 0.75rem; color: #94a3b8; margin-bottom: 4px; }
+  .card-value { font-size: 1.3rem; font-weight: 700; }
+  .card-sub { font-size: 0.75rem; color: #64748b; margin-top: 3px; }
+  .neutral { color: #60a5fa; }
+  .positive { color: #34d399; }
+  .section { background: #1e293b; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+  .section-title { font-size: 0.9rem; font-weight: 700; color: #f8fafc; margin-bottom: 12px; }
+  .progress-label { display: flex; justify-content: space-between; font-size: 0.8rem; color: #94a3b8; margin-bottom: 6px; }
+  .progress-bar { background: #334155; border-radius: 8px; height: 12px; overflow: hidden; }
+  .donut-wrap { display: flex; align-items: center; gap: 20px; }
+  .donut-legend { flex: 1; }
+  .legend-item { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 0.82rem; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+  .legend-label { color: #94a3b8; flex: 1; }
+  .legend-val { color: #e2e8f0; font-weight: 700; }
+  .candidate { border-left: 3px solid; padding: 10px 12px; margin-bottom: 8px; background: #0f172a; border-radius: 0 8px 8px 0; }
+  .candidate-name { font-weight: 700; font-size: 0.95rem; }
+  .candidate-detail { font-size: 0.8rem; color: #94a3b8; margin-top: 4px; }
+  .candidate-comment { font-size: 0.82rem; color: #cbd5e1; margin-top: 6px; font-style: italic; }
+  .nisa { background: #065f46; color: #6ee7b7; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle; }
+  .ibadge { background: #4c1d95; color: #ddd6fe; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle; }
+  .tora { background: #1e3a5f; border-radius: 12px; padding: 16px; border-left: 4px solid #3b82f6; }
+  .tora-text { font-size: 0.9rem; line-height: 1.7; }
+  table { width: 100%; font-size: 0.85rem; border-collapse: collapse; }
+  th { text-align: left; padding: 6px 0; color: #94a3b8; border-bottom: 1px solid #334155; }
+  th:not(:first-child) { text-align: right; }
+  td { padding: 7px 0; border-bottom: 1px solid #1a2535; }
+  td:not(:first-child) { text-align: right; }
+  .total-row td { font-weight: 700; color: #f8fafc; padding-top: 10px; border-bottom: none; }
+  .ideco-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+  .ideco-card { background: #1a0b2e; border-radius: 10px; padding: 12px; }
+</style>
+</head>
+<body>
+<h1>🐯 虎之助 週次チェック</h1>
+<div class="date">📅 2026年6月10日</div>
+<div class="cards">
+  <div class="card"><div class="card-label">💰 総資産（iDeCo含む）</div><div class="card-value neutral">¥10,432,843</div><div class="card-sub">流動資産のみ ¥9,709,744</div></div>
+  <div class="card"><div class="card-label">📈 証券評価額</div><div class="card-value neutral">¥4,453,971</div></div>
+  <div class="card"><div class="card-label">🏦 現預金合計</div><div class="card-value neutral">¥5,255,773</div></div>
+  <div class="card"><div class="card-label">🎯 年間配当推定</div><div class="card-value positive">¥64,828</div></div>
+</div>
+<div class="section">
+  <div class="section-title">🏆 年間配当プログレス（目標 ¥2,400,000）</div>
+  <div class="progress-label"><span>¥64,828 / 年</span><span>2.7%</span></div>
+  <div class="progress-bar"><div style="height:100%;width:2.7%;border-radius:8px;background:linear-gradient(90deg,#3b82f6,#06b6d4)"></div></div>
+  <div style="font-size:0.78rem;color:#64748b;margin-top:6px">残り ¥2,335,172/年（月 ¥194,598 不足）</div>
+</div>
+<div class="section">
+  <div class="section-title">🥧 ポートフォリオ全体配分（iDeCo含む）</div>
+  <div class="donut-wrap">
+    <svg viewBox="0 0 200 200" width="160" height="160" style="flex-shrink:0">
+      <circle cx="100" cy="100" r="70" fill="none" stroke="#334155" stroke-width="28"/>
+      <circle cx="100" cy="100" r="70" fill="none" stroke="#3b82f6" stroke-width="28" stroke-dasharray="102.7 337.1" stroke-dashoffset="110"/>
+      <circle cx="100" cy="100" r="70" fill="none" stroke="#06b6d4" stroke-width="28" stroke-dasharray="36.3 403.5" stroke-dashoffset="5"/>
+      <circle cx="100" cy="100" r="70" fill="none" stroke="#8b5cf6" stroke-width="28" stroke-dasharray="42.4 397.4" stroke-dashoffset="-33"/>
+      <circle cx="100" cy="100" r="70" fill="none" stroke="#f59e0b" stroke-width="28" stroke-dasharray="219.7 220.1" stroke-dashoffset="-77"/>
+      <circle cx="100" cy="100" r="70" fill="none" stroke="#a78bfa" stroke-width="28" stroke-dasharray="28.3 411.5" stroke-dashoffset="-299"/>
+      <text x="100" y="95" text-anchor="middle" fill="#94a3b8" font-size="11" font-family="-apple-system,sans-serif">合計</text>
+      <text x="100" y="114" text-anchor="middle" fill="#f8fafc" font-size="13" font-weight="bold" font-family="-apple-system,sans-serif">¥1,042万</text>
+    </svg>
+    <div class="donut-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#3b82f6"></div><span class="legend-label">米国株</span><span class="legend-val">23.8%</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#06b6d4"></div><span class="legend-label">日本株</span><span class="legend-val">8.7%</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#8b5cf6"></div><span class="legend-label">投資信託</span><span class="legend-val">10.1%</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#f59e0b"></div><span class="legend-label">現預金</span><span class="legend-val">50.4%</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#a78bfa"></div><span class="legend-label">iDeCo</span><span class="legend-val">6.9%</span></div>
+    </div>
+  </div>
+</div>
+<div class="section">
+  <div class="section-title">💼 資産内訳</div>
+  <table>
+    <tr><th>カテゴリ</th><th>評価額</th><th>構成比</th></tr>
+    <tr><td>米国株</td><td>¥2,480,000</td><td style="color:#3b82f6">23.8%</td></tr>
+    <tr><td>日本株</td><td>¥909,000</td><td style="color:#06b6d4">8.7%</td></tr>
+    <tr><td>投資信託</td><td>¥1,050,000</td><td style="color:#8b5cf6">10.1%</td></tr>
+    <tr><td>現預金</td><td>¥5,255,773</td><td style="color:#f59e0b">50.4%</td></tr>
+    <tr><td>iDeCo <span class="ibadge">退職金口座</span></td><td>¥723,099</td><td style="color:#a78bfa">6.9%</td></tr>
+    <tr class="total-row"><td>合計</td><td>¥10,417,872</td><td>100%</td></tr>
+  </table>
+</div>
+<div class="section">
+  <div class="section-title">🟣 iDeCo（楽天証券）<span class="ibadge">60歳まで引出不可</span></div>
+  <div class="ideco-cards">
+    <div class="ideco-card"><div class="card-label">評価額</div><div class="card-value" style="color:#a78bfa">¥723,099</div></div>
+    <div class="ideco-card"><div class="card-label">含み益</div><div class="card-value positive">+¥99,453</div><div class="card-sub">投資累計 ¥623,646</div></div>
+  </div>
+  <div class="progress-label" style="margin-bottom:14px"><span>運用利回り</span><span style="color:#34d399;font-weight:700;font-size:1rem">15.69%</span></div>
+  <div class="donut-wrap">
+    <svg viewBox="0 0 200 200" width="150" height="150" style="flex-shrink:0">
+      <circle cx="100" cy="100" r="70" fill="none" stroke="#334155" stroke-width="28"/>
+      <circle cx="100" cy="100" r="70" fill="none" stroke="#7c3aed" stroke-width="28" stroke-dasharray="212.2 227.6" stroke-dashoffset="110"/>
+      <circle cx="100" cy="100" r="70" fill="none" stroke="#a78bfa" stroke-width="28" stroke-dasharray="152.8 287.0" stroke-dashoffset="-104"/>
+      <circle cx="100" cy="100" r="70" fill="none" stroke="#c4b5fd" stroke-width="28" stroke-dasharray="46.8 393.0" stroke-dashoffset="-259"/>
+      <circle cx="100" cy="100" r="70" fill="none" stroke="#6d28d9" stroke-width="28" stroke-dasharray="20.0 419.8" stroke-dashoffset="-308"/>
+      <text x="100" y="95" text-anchor="middle" fill="#94a3b8" font-size="11" font-family="-apple-system,sans-serif">iDeCo</text>
+      <text x="100" y="114" text-anchor="middle" fill="#f8fafc" font-size="13" font-weight="bold" font-family="-apple-system,sans-serif">¥723,099</text>
+    </svg>
+    <div class="donut-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#7c3aed"></div><span class="legend-label">国内外株式</span><span class="legend-val">48.7%</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#a78bfa"></div><span class="legend-label">外国債券</span><span class="legend-val">35.2%</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#c4b5fd"></div><span class="legend-label">定期預金</span><span class="legend-val">11.1%</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#6d28d9"></div><span class="legend-label">コモディティ</span><span class="legend-val">5.0%</span></div>
+    </div>
+  </div>
+</div>
+<div class="section">
+  <div class="section-title">🔴 売り候補 TOP3</div>
+  <div class="candidate" style="border-color:#f87171"><div class="candidate-name">1位：YRD（人人网）</div><div class="candidate-detail">配当なし　含み損：大</div><div class="candidate-comment">💬 成長期待薄・配当無し。ポジション整理筆頭。</div></div>
+  <div class="candidate" style="border-color:#f87171"><div class="candidate-name">2位：NKE（ナイキ）</div><div class="candidate-detail">配当：1.8%　業績低迷継続</div><div class="candidate-comment">💬 低配当で保有メリット薄い。整理を検討。</div></div>
+  <div class="candidate" style="border-color:#f87171"><div class="candidate-name">3位：メディア工房（3815）</div><div class="candidate-detail">小型株・流動性低</div><div class="candidate-comment">💬 流動性リスクあり。整理優先度高。</div></div>
+</div>
+<div class="section">
+  <div class="section-title">🟢 買い候補 TOP3</div>
+  <div class="candidate" style="border-color:#34d399"><div class="candidate-name">1位：VZ（ベライゾン）<span class="nisa">NISA適格</span></div><div class="candidate-detail">配当利回り：5.9%　米国通信大手</div><div class="candidate-comment">💬 高配当・割安水準。配当目標への貢献大。</div></div>
+  <div class="candidate" style="border-color:#34d399"><div class="candidate-name">2位：東海東京HD（8616）<span class="nisa">NISA適格</span></div><div class="candidate-detail">配当利回り：7.1%　国内証券</div><div class="candidate-comment">💬 国内最高水準の配当利回り。増配傾向継続中。</div></div>
+  <div class="candidate" style="border-color:#34d399"><div class="candidate-name">3位：KDDI（9433）<span class="nisa">NISA適格</span></div><div class="candidate-detail">24年連続増配　安定高配当</div><div class="candidate-comment">💬 連続増配の王道銘柄。長期保有の核に最適。</div></div>
+</div>
+<div class="tora">
+  <div style="font-size:1.4rem;margin-bottom:6px">🐯</div>
+  <div class="tora-text">【虎之助まとめ】iDeCo込みの総資産¥1,043万！iDeCoの利回り15.69%は優秀、引き続き放置でOK。流動資産側では売りTOP3（YRD・NKE・メディア工房）を整理し、VZ・東海東京HD・KDDIの高配当銘柄へシフトが今週の一手。ただし投資判断はご自身でどうぞ。配当目標¥240万へ、着実に積み上げていきましょう。★</div>
+</div>
+</body>
+</html>
