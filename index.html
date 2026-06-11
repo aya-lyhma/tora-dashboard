@@ -42,23 +42,49 @@
   .total-row td { font-weight: 700; color: #f8fafc; padding-top: 10px; border-bottom: none; }
   .ideco-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
   .ideco-card { background: #1a0b2e; border-radius: 10px; padding: 12px; }
+  .card-link { color: inherit; text-decoration: none; display: block; }
+  .card-tap-hint { font-size: 0.7rem; color: #475569; margin-top: 4px; }
+  .card:has(.card-link):hover { background: #263548; }
 </style>
 </head>
 <body>
+
 <h1>🐯 虎之助 週次チェック</h1>
 <div class="date">📅 2026年6月10日</div>
+
 <div class="cards">
-  <div class="card"><div class="card-label">💰 総資産（iDeCo含む）</div><div class="card-value neutral">¥10,432,843</div><div class="card-sub">流動資産のみ ¥9,709,744</div></div>
-  <div class="card"><div class="card-label">📈 証券評価額</div><div class="card-value neutral">¥4,453,971</div></div>
-  <div class="card"><div class="card-label">🏦 現預金合計</div><div class="card-value neutral">¥5,255,773</div></div>
-  <div class="card"><div class="card-label">🎯 年間配当推定</div><div class="card-value positive">¥64,828</div></div>
+  <div class="card">
+    <div class="card-label">💰 総資産（iDeCo含む）</div>
+    <div class="card-value neutral">¥10,432,843</div>
+    <div class="card-sub">流動資産のみ ¥9,709,744</div>
+  </div>
+  <div class="card">
+    <div class="card-label">📈 証券評価額</div>
+    <a class="card-link" href="#securities-detail">
+      <div class="card-value neutral">¥4,453,971</div>
+      <div class="card-tap-hint">↓ 内訳を見る</div>
+    </a>
+  </div>
+  <div class="card">
+    <div class="card-label">🏦 現預金合計</div>
+    <a class="card-link" href="#cash-detail">
+      <div class="card-value neutral">¥5,255,773</div>
+      <div class="card-tap-hint">↓ 内訳を見る</div>
+    </a>
+  </div>
+  <div class="card">
+    <div class="card-label">🎯 年間配当推定</div>
+    <div class="card-value positive">¥64,828</div>
+  </div>
 </div>
+
 <div class="section">
   <div class="section-title">🏆 年間配当プログレス（目標 ¥2,400,000）</div>
   <div class="progress-label"><span>¥64,828 / 年</span><span>2.7%</span></div>
   <div class="progress-bar"><div style="height:100%;width:2.7%;border-radius:8px;background:linear-gradient(90deg,#3b82f6,#06b6d4)"></div></div>
   <div style="font-size:0.78rem;color:#64748b;margin-top:6px">残り ¥2,335,172/年（月 ¥194,598 不足）</div>
 </div>
+
 <div class="section">
   <div class="section-title">🥧 ポートフォリオ全体配分（iDeCo含む）</div>
   <div class="donut-wrap">
@@ -81,6 +107,7 @@
     </div>
   </div>
 </div>
+
 <div class="section">
   <div class="section-title">💼 資産内訳</div>
   <table>
@@ -93,11 +120,19 @@
     <tr class="total-row"><td>合計</td><td>¥10,417,872</td><td>100%</td></tr>
   </table>
 </div>
+
 <div class="section">
   <div class="section-title">🟣 iDeCo（楽天証券）<span class="ibadge">60歳まで引出不可</span></div>
   <div class="ideco-cards">
-    <div class="ideco-card"><div class="card-label">評価額</div><div class="card-value" style="color:#a78bfa">¥723,099</div></div>
-    <div class="ideco-card"><div class="card-label">含み益</div><div class="card-value positive">+¥99,453</div><div class="card-sub">投資累計 ¥623,646</div></div>
+    <div class="ideco-card">
+      <div class="card-label">評価額</div>
+      <div class="card-value" style="color:#a78bfa">¥723,099</div>
+    </div>
+    <div class="ideco-card">
+      <div class="card-label">含み益</div>
+      <div class="card-value positive">+¥99,453</div>
+      <div class="card-sub">投資累計 ¥623,646</div>
+    </div>
   </div>
   <div class="progress-label" style="margin-bottom:14px"><span>運用利回り</span><span style="color:#34d399;font-weight:700;font-size:1rem">15.69%</span></div>
   <div class="donut-wrap">
@@ -118,21 +153,66 @@
     </div>
   </div>
 </div>
+
 <div class="section">
   <div class="section-title">🔴 売り候補 TOP3</div>
-  <div class="candidate" style="border-color:#f87171"><div class="candidate-name">1位：YRD（人人网）</div><div class="candidate-detail">配当なし　含み損：大</div><div class="candidate-comment">💬 成長期待薄・配当無し。ポジション整理筆頭。</div></div>
-  <div class="candidate" style="border-color:#f87171"><div class="candidate-name">2位：NKE（ナイキ）</div><div class="candidate-detail">配当：1.8%　業績低迷継続</div><div class="candidate-comment">💬 低配当で保有メリット薄い。整理を検討。</div></div>
-  <div class="candidate" style="border-color:#f87171"><div class="candidate-name">3位：メディア工房（3815）</div><div class="candidate-detail">小型株・流動性低</div><div class="candidate-comment">💬 流動性リスクあり。整理優先度高。</div></div>
+  <div class="candidate" style="border-color:#f87171">
+    <div class="candidate-name">1位：YRD（人人网）</div>
+    <div class="candidate-detail">配当なし　含み損：大</div>
+    <div class="candidate-comment">💬 成長期待薄・配当無し。ポジション整理筆頭。</div>
+  </div>
+  <div class="candidate" style="border-color:#f87171">
+    <div class="candidate-name">2位：NKE（ナイキ）</div>
+    <div class="candidate-detail">配当：1.8%　業績低迷継続</div>
+    <div class="candidate-comment">💬 低配当で保有メリット薄い。整理を検討。</div>
+  </div>
+  <div class="candidate" style="border-color:#f87171">
+    <div class="candidate-name">3位：メディア工房（3815）</div>
+    <div class="candidate-detail">小型株・流動性低</div>
+    <div class="candidate-comment">💬 流動性リスクあり。整理優先度高。</div>
+  </div>
 </div>
+
 <div class="section">
   <div class="section-title">🟢 買い候補 TOP3</div>
-  <div class="candidate" style="border-color:#34d399"><div class="candidate-name">1位：VZ（ベライゾン）<span class="nisa">NISA適格</span></div><div class="candidate-detail">配当利回り：5.9%　米国通信大手</div><div class="candidate-comment">💬 高配当・割安水準。配当目標への貢献大。</div></div>
-  <div class="candidate" style="border-color:#34d399"><div class="candidate-name">2位：東海東京HD（8616）<span class="nisa">NISA適格</span></div><div class="candidate-detail">配当利回り：7.1%　国内証券</div><div class="candidate-comment">💬 国内最高水準の配当利回り。増配傾向継続中。</div></div>
-  <div class="candidate" style="border-color:#34d399"><div class="candidate-name">3位：KDDI（9433）<span class="nisa">NISA適格</span></div><div class="candidate-detail">24年連続増配　安定高配当</div><div class="candidate-comment">💬 連続増配の王道銘柄。長期保有の核に最適。</div></div>
+  <div class="candidate" style="border-color:#34d399">
+    <div class="candidate-name">1位：VZ（ベライゾン）<span class="nisa">NISA適格</span></div>
+    <div class="candidate-detail">配当利回り：5.9%　米国通信大手</div>
+    <div class="candidate-comment">💬 高配当・割安水準。配当目標への貢献大。</div>
+  </div>
+  <div class="candidate" style="border-color:#34d399">
+    <div class="candidate-name">2位：東海東京HD（8616）<span class="nisa">NISA適格</span></div>
+    <div class="candidate-detail">配当利回り：7.1%　国内証券</div>
+    <div class="candidate-comment">💬 国内最高水準の配当利回り。増配傾向継続中。</div>
+  </div>
+  <div class="candidate" style="border-color:#34d399">
+    <div class="candidate-name">3位：KDDI（9433）<span class="nisa">NISA適格</span></div>
+    <div class="candidate-detail">24年連続増配　安定高配当</div>
+    <div class="candidate-comment">💬 連続増配の王道銘柄。長期保有の核に最適。</div>
+  </div>
 </div>
+
+<div class="section" id="securities-detail">
+  <div class="section-title">📈 証券内訳</div>
+  <table>
+    <tr><th>カテゴリ</th><th>評価額</th><th>構成比</th></tr>
+    <tr><td>米国株</td><td>¥2,480,000</td><td style="color:#3b82f6">55.7%</td></tr>
+    <tr><td>日本株</td><td>¥909,000</td><td style="color:#06b6d4">20.4%</td></tr>
+    <tr><td>投資信託</td><td>¥1,050,000</td><td style="color:#8b5cf6">23.6%</td></tr>
+    <tr class="total-row"><td>合計</td><td>¥4,439,000</td><td>—</td></tr>
+  </table>
+  <div style="font-size:0.75rem;color:#64748b;margin-top:8px">※ カードの証券評価額（¥4,453,971）との差額 ¥14,971 は未分類分（要確認）</div>
+</div>
+
+<div class="section" id="cash-detail">
+  <div class="section-title">🏦 現預金内訳</div>
+  <div style="color:#64748b;font-size:0.85rem;padding:4px 0">口座別データ追加予定。各銀行の残高を虎之助に教えてください。</div>
+</div>
+
 <div class="tora">
   <div style="font-size:1.4rem;margin-bottom:6px">🐯</div>
   <div class="tora-text">【虎之助まとめ】iDeCo込みの総資産¥1,043万！iDeCoの利回り15.69%は優秀、引き続き放置でOK。流動資産側では売りTOP3（YRD・NKE・メディア工房）を整理し、VZ・東海東京HD・KDDIの高配当銘柄へシフトが今週の一手。ただし投資判断はご自身でどうぞ。配当目標¥240万へ、着実に積み上げていきましょう。★</div>
 </div>
+
 </body>
 </html>
