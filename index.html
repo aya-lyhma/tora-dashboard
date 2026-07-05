@@ -366,19 +366,19 @@
   <div class="section-title">💴 現預金トレンド（週次）</div>
   <div class="delta-grid">
     <div class="delta-card">
-      <div class="delta-label">6/10 → 6/20</div>
-      <div class="delta-value">−¥171万</div>
-      <div class="delta-detail">楽天 −¥118万<br>りそな −¥50万</div>
-    </div>
-    <div class="delta-card">
       <div class="delta-label">6/20 → 6/27</div>
       <div class="delta-value">−¥101万</div>
       <div class="delta-detail">SBI新生 −¥100万<br>りそな −¥53万<br>楽天 +¥49万</div>
     </div>
+    <div class="delta-card">
+      <div class="delta-label">6/27 → 7/4</div>
+      <div class="delta-value">−¥116万</div>
+      <div class="delta-detail">SBI新生 −¥50万<br>りそな −¥44万<br>楽天 −¥23万</div>
+    </div>
     <div class="delta-card accent">
       <div class="delta-label">6/10比 累計</div>
-      <div class="delta-value">−¥272万</div>
-      <div class="delta-detail warn">3週間で ▲52%</div>
+      <div class="delta-value">−¥389万</div>
+      <div class="delta-detail warn">4週間で ▲74%</div>
     </div>
   </div>
   <div class="chart-label">📉 現預金合計推移</div>
@@ -405,12 +405,12 @@
   Chart.defaults.font.family = '-apple-system, sans-serif';
   Chart.defaults.font.size = 11;
   const gridColor = '#1e293b';
-  const lineData = [3600000, 5243272, 3531434, 2521955];
-  const prevDiffs = [null, 1643272, -1711838, -1009479];
+  const lineData = [3600000, 5243272, 3531434, 2521955, 1357266];
+  const prevDiffs = [null, 1643272, -1711838, -1009479, -1164689];
   new Chart(document.getElementById('cashTrendLine'), {
     type: 'line',
     data: {
-      labels: ['5月（概算）', '6月10日', '6月20日', '6月27日'],
+      labels: ['5月（概算）', '6月10日', '6月20日', '6月27日', '7月4日'],
       datasets: [{
         label: '現預金合計',
         data: lineData,
@@ -449,13 +449,13 @@
   new Chart(document.getElementById('cashTrendBar'), {
     type: 'bar',
     data: {
-      labels: ['6月10日', '6月20日', '6月27日'],
+      labels: ['6月10日', '6月20日', '6月27日', '7月4日'],
       datasets: [
-        { label: '楽天銀行', data: [1521338, 343634, 833834], backgroundColor: '#ef4444' },
-        { label: 'SBI新生', data: [2084071, 2056164, 1056350], backgroundColor: '#3b82f6' },
-        { label: 'りそな', data: [1521338, 1019253, 489088], backgroundColor: '#8b5cf6' },
-        { label: 'ゆうちょ', data: [63502, 63560, 63560], backgroundColor: '#22c55e' },
-        { label: '栃木銀行', data: [53023, 48823, 79123], backgroundColor: '#eab308' }
+        { label: '楽天銀行', data: [1521338, 343634, 833834, 604911], backgroundColor: '#ef4444' },
+        { label: 'SBI新生', data: [2084071, 2056164, 1056350, 556416], backgroundColor: '#3b82f6' },
+        { label: 'りそな', data: [1521338, 1019253, 489088, 53256], backgroundColor: '#8b5cf6' },
+        { label: 'ゆうちょ', data: [63502, 63560, 63560, 63560], backgroundColor: '#22c55e' },
+        { label: '栃木銀行', data: [53023, 48823, 79123, 79123], backgroundColor: '#eab308' }
       ]
     },
     options: {
