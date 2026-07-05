@@ -47,7 +47,23 @@
   .card-link { color: inherit; text-decoration: none; display: block; }
   .card-tap-hint { font-size: 0.7rem; color: #475569; margin-top: 4px; }
   .card:has(.card-link):hover { background: #263548; }
+
+  /* ── 現預金トレンド専用スタイル ── */
+  .delta-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+  .delta-card { background: #0f172a; border-radius: 10px; padding: 10px 12px; border-left: 3px solid #f87171; }
+  .delta-card.accent { border-left-color: #dc2626; border-top: 1px solid #7f1d1d; }
+  .delta-label { font-size: 0.68rem; color: #64748b; margin-bottom: 4px; }
+  .delta-value { font-size: 1.05rem; font-weight: 700; color: #f87171; }
+  .delta-detail { font-size: 0.68rem; color: #64748b; margin-top: 4px; line-height: 1.55; }
+  .delta-detail.warn { color: #f87171; font-weight: 700; }
+  .chart-wrap { position: relative; height: 220px; margin-bottom: 4px; }
+  .chart-label { font-size: 0.82rem; font-weight: 700; color: #94a3b8; margin-bottom: 8px; }
+  .bank-legend { display: flex; flex-wrap: wrap; gap: 5px 12px; margin-top: 10px; font-size: 0.77rem; color: #94a3b8; }
+  .bank-legend span { display: flex; align-items: center; gap: 4px; }
+  .bank-legend i { width: 10px; height: 10px; border-radius: 2px; display: inline-block; flex-shrink: 0; }
+  .chart-note { font-size: 0.72rem; color: #475569; margin-top: 6px; margin-bottom: 16px; }
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
 </head>
 <body>
 <h1>🐯 虎之助 週次チェック</h1>
@@ -346,9 +362,124 @@
   <div style="font-size:0.75rem;color:#64748b;margin-top:8px">先週比 -¥1,164,689（楽天カード¥385,832・法人関連費用等）</div>
 </div>
 
+<div class="section" id="cash-trend">
+  <div class="section-title">💴 現預金トレンド（週次）</div>
+  <div class="delta-grid">
+    <div class="delta-card">
+      <div class="delta-label">6/10 → 6/20</div>
+      <div class="delta-value">−¥171万</div>
+      <div class="delta-detail">楽天 −¥118万<br>りそな −¥50万</div>
+    </div>
+    <div class="delta-card">
+      <div class="delta-label">6/20 → 6/27</div>
+      <div class="delta-value">−¥101万</div>
+      <div class="delta-detail">SBI新生 −¥100万<br>りそな −¥53万<br>楽天 +¥49万</div>
+    </div>
+    <div class="delta-card accent">
+      <div class="delta-label">6/10比 累計</div>
+      <div class="delta-value">−¥272万</div>
+      <div class="delta-detail warn">3週間で ▲52%</div>
+    </div>
+  </div>
+  <div class="chart-label">📉 現預金合計推移</div>
+  <div class="chart-wrap"><canvas id="cashTrendLine"></canvas></div>
+  <div class="chart-note">※5月はりそな除く概算</div>
+  <div class="chart-label">🏦 銀行別残高（積み上げ）</div>
+  <div class="chart-wrap"><canvas id="cashTrendBar"></canvas></div>
+  <div class="bank-legend">
+    <span><i style="background:#ef4444"></i>楽天銀行</span>
+    <span><i style="background:#3b82f6"></i>SBI新生</span>
+    <span><i style="background:#8b5cf6"></i>りそな</span>
+    <span><i style="background:#22c55e"></i>ゆうちょ</span>
+    <span><i style="background:#eab308"></i>栃木銀行</span>
+  </div>
+</div>
 <div class="tora">
   <div style="font-size:1.4rem;margin-bottom:6px">🐯</div>
   <div class="tora-text">【虎之助まとめ 7/4】総資産¥674万（先週¥785万から-¥111万）。銀行残高が-¥116万の大幅減（楽天カード¥38万引き落とし完了＋法人関連費用等）。証券側はKO（コカ・コーラ）を新規2株取得、YRDは全株売却注文を執行中。MUが-16%下落するも依然+752%の圧倒的含み益を維持。NKEは-22%（先週-25.3%）に若干回復。投資信託3ファンドは全て含み益（+6〜+22%）で安定継続。iDeCoは+¥111,522・利回り17.06%とさらに好調。KDDIが今週プラス転換。投資判断はご自身でどうぞ。★</div>
 </div>
+
+<script>
+(function() {
+  Chart.defaults.color = '#94a3b8';
+  Chart.defaults.font.family = '-apple-system, sans-serif';
+  Chart.defaults.font.size = 11;
+  const gridColor = '#1e293b';
+  const lineData = [3600000, 5243272, 3531434, 2521955];
+  const prevDiffs = [null, 1643272, -1711838, -1009479];
+  new Chart(document.getElementById('cashTrendLine'), {
+    type: 'line',
+    data: {
+      labels: ['5月（概算）', '6月10日', '6月20日', '6月27日'],
+      datasets: [{
+        label: '現預金合計',
+        data: lineData,
+        segment: { borderColor: ctx => ctx.p1DataIndex <= 1 ? '#60a5fa' : '#f87171' },
+        pointBackgroundColor: ctx => ctx.dataIndex <= 1 ? '#60a5fa' : '#f87171',
+        pointBorderColor: ctx => ctx.dataIndex <= 1 ? '#60a5fa' : '#f87171',
+        pointRadius: 5, pointHoverRadius: 7, borderWidth: 2.5, tension: 0.3, fill: false
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#1e293b', borderColor: '#475569', borderWidth: 1,
+          titleColor: '#94a3b8', bodyColor: '#e2e8f0', padding: 10,
+          callbacks: {
+            label: ctx => {
+              const man = Math.round(ctx.raw / 10000);
+              const diff = prevDiffs[ctx.dataIndex];
+              if (diff === null) return '¥' + man + '万（基準値）';
+              const sign = diff >= 0 ? '+' : '';
+              return '¥' + man + '万（前回比 ' + sign + Math.round(diff/10000) + '万）';
+            }
+          }
+        }
+      },
+      scales: {
+        x: { grid: { color: gridColor }, ticks: { color: '#94a3b8' } },
+        y: { min: 0, max: 6500000, grid: { color: gridColor },
+          ticks: { color: '#94a3b8', stepSize: 1000000, callback: v => '¥' + Math.round(v/10000) + '万' } }
+      }
+    }
+  });
+  new Chart(document.getElementById('cashTrendBar'), {
+    type: 'bar',
+    data: {
+      labels: ['6月10日', '6月20日', '6月27日'],
+      datasets: [
+        { label: '楽天銀行', data: [1521338, 343634, 833834], backgroundColor: '#ef4444' },
+        { label: 'SBI新生', data: [2084071, 2056164, 1056350], backgroundColor: '#3b82f6' },
+        { label: 'りそな', data: [1521338, 1019253, 489088], backgroundColor: '#8b5cf6' },
+        { label: 'ゆうちょ', data: [63502, 63560, 63560], backgroundColor: '#22c55e' },
+        { label: '栃木銀行', data: [53023, 48823, 79123], backgroundColor: '#eab308' }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#1e293b', borderColor: '#475569', borderWidth: 1,
+          titleColor: '#94a3b8', bodyColor: '#e2e8f0', padding: 10,
+          callbacks: {
+            label: ctx => ctx.dataset.label + '：¥' + (ctx.raw/10000).toFixed(1) + '万',
+            footer: items => '合計：¥' + Math.round(items.reduce((s,i)=>s+i.raw,0)/10000) + '万'
+          }
+        }
+      },
+      scales: {
+        x: { stacked: true, grid: { display: false }, ticks: { color: '#94a3b8' } },
+        y: { stacked: true, min: 0, max: 6500000, grid: { color: gridColor },
+          ticks: { color: '#94a3b8', stepSize: 1000000, callback: v => '¥' + Math.round(v/10000) + '万' } }
+      }
+    }
+  });
+})();
+</script>
 </body>
 </html>
